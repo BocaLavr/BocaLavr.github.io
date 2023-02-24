@@ -89,7 +89,7 @@ function addToWallet() {
         'type': 'ERC20',
         'options': {
           'address': '0x8b215fd3DFFB11c84C7a2074fbEB38669501e935',
-          'symbol': 'Nebula',
+          'symbol': 'NBL',
           'decimals': '18'
         },
       },
