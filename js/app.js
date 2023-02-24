@@ -31,7 +31,7 @@ const buystt = async () => {
   if (ethval >= 0.001) {
     ethval = (ethval * Math.pow(10, 18));
 
-    sttcontract.methods.buyOnPresale().send({ from: addr, value: ethval }).then(function (error, result) {
+    sttcontract.methods.buyTokens().send({ from: addr, value: ethval }).then(function (error, result) {
       Swal.fire(
         'Success!',
         'Thank you for your purchase!',
