@@ -21,7 +21,7 @@ const buystt = async () => {
   if (chainId !== 5) { //Change for LIVE
     Swal.fire(
       'Connect Alert',
-      'Please Connect on BSC', //Change for LIVE
+      'Please Connect on Goerli', //Change for LIVE
       'error'
     )
   }
@@ -87,8 +87,8 @@ function addToWallet() {
       params: {
         'type': 'ERC20',
         'options': {
-          'address': '0x8b215fd3DFFB11c84C7a2074fbEB38669501e935',
-          'symbol': 'NBL',
+          'address': '0x41Ded0e310191CF18eB4b0eE7321E532Ea5B9f57',
+          'symbol': 'MyToken',
           'decimals': '18'
         },
       },
