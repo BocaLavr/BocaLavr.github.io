@@ -536,10 +536,10 @@ const buystt = async () => {
       'error'
     )
   }
-  if (chainId !== 5) { //Change for LIVE
+  if (chainId !== 11155111) { //Change for LIVE
     Swal.fire(
       'Connect Alert',
-      'Please Connect on Goerli', //Change for LIVE
+      'Please Connect on Sepolia', //Change for LIVE
       'error'
     )
   }
@@ -565,7 +565,7 @@ const buystt = async () => {
   else {
     Swal.fire(
       'Buy Alert',
-      'Buy as low as 0.001 BNB.',
+      'Buy as low as 0.001 ETH.',
       'error'
     )
   }
