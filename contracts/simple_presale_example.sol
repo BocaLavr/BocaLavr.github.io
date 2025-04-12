@@ -1,57 +1,55 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.20;
+
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MyToken is ERC20, Ownable {
-    uint256 public immutable finalTotalSupply = 10000 * 10**decimals();
-    uint256 public immutable presaleMaxSupply = 1000 * 10**decimals();
+    uint256 public immutable finalTotalSupply;
+    uint256 public immutable presaleMaxSupply;
 
-    uint256 public presaleCounter = 0;
-    uint256 public presaleCost1 = 0.05 ether; //cost1 for 1 * 10 ** decimals()
-    uint256 public presaleCost2 = 0.1 ether; //cost2 for 1 * 10 ** decimals()
+    uint256 public presaleCounter;
+    uint256 public presaleCost1 = 0.05 ether;
+    uint256 public presaleCost2 = 0.1 ether;
 
-    uint8 public stage = 0; //0 - nothing, 1 - first presale round, 2 - second presale round, 3 - token launched
+    uint8 public stage; // 0 - nothing, 1 - first presale, 2 - second presale, 3 - launched
 
-    constructor() ERC20("MyToken", "MTK") {}
+    constructor(address initialOwner) ERC20("Plexus", "PLX") Ownable(initialOwner) {
+        uint256 decimalsFactor = 10 ** decimals();
+        finalTotalSupply = 10000 * decimalsFactor;
+        presaleMaxSupply = 1000 * decimalsFactor;
+    }
 
-    function buyOnPresale() public payable {
-        require(
-            stage == 1 || stage == 2,
-            "Presale has not started yet or has already ended!"
-        );
+    function buyOnPresale() external payable {
+        require(stage == 1 || stage == 2, "Presale is not active");
 
-        uint256 cost = presaleCost1;
-        if (stage == 2) cost = presaleCost2;
+        uint256 cost = stage == 2 ? presaleCost2 : presaleCost1;
+        uint256 amount = (msg.value * 10 ** decimals()) / cost;
 
-        uint256 amount = (msg.value * 10**decimals()) / cost;
-        require(amount > 1, "Too little value!");
-
-        uint256 newSupply = totalSupply() + amount;
-        require(newSupply <= finalTotalSupply, "Final supply reached!");
+        require(amount > 0, "Insufficient ETH sent");
+        require(totalSupply() + amount <= finalTotalSupply, "Exceeds final supply");
+        require(presaleCounter + amount <= presaleMaxSupply, "Exceeds presale supply");
 
         presaleCounter += amount;
-        require(
-            presaleCounter <= presaleMaxSupply,
-            "Final presale supply reached!"
-        );
-
         _mint(msg.sender, amount);
     }
 
-    function mint(address to, uint256 amount) public onlyOwner {
-        uint256 newSupply = totalSupply() + amount * 10**decimals();
-        require(newSupply <= finalTotalSupply, "Final supply reached!");
-        _mint(to, amount * 10**decimals());
+    function mint(address to, uint256 amount) external onlyOwner {
+        uint256 mintAmount = amount * 10 ** decimals();
+        require(totalSupply() + mintAmount <= finalTotalSupply, "Exceeds final supply");
+        _mint(to, mintAmount);
     }
 
-    function setStage(uint8 _stg) public onlyOwner {
-        stage = _stg;
+    function setStage(uint8 _stage) external onlyOwner {
+        require(_stage <= 3, "Invalid stage");
+        stage = _stage;
     }
 
-    function withdraw() public payable onlyOwner {
-        (bool os, ) = payable(owner()).call{value: address(this).balance}("");
-        require(os);
-    }
+    function withdraw() external onlyOwner {
+        uint256 balance = address(this).balance;
+        require(balance > 0, "No funds to withdraw");
 
+        (bool success, ) = payable(owner()).call{value: balance}("");
+        require(success, "Withdraw failed");
+    }
 }
