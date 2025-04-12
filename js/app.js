@@ -571,48 +571,48 @@ const buystt = async () => {
   }
 }
 
-const loadweb3 = async () => {
-  try {
-    if (window.ethereum) {
-      web3 = new Web3(window.ethereum);
-      console.log('Injected web3 detected.');
-      sttcontract = new web3.eth.Contract(sttabi, sttaddr);
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      addr = web3.utils.toChecksumAddress(accounts[0]);
-      return addr;
-    } else {
-      Swal.fire('Connect Alert', 'Please install MetaMask!', 'error');
-    }
-  } catch (error) {
-    if (error.code === 4001) {
-      console.log('Please connect to MetaMask.');
-    } else {
-      Swal.fire('Connect Alert', 'An error occurred during connection!', 'error');
-    }
-  }
-};
-
 // const loadweb3 = async () => {
 //   try {
-//     web3 = new web3js.myweb3(window.ethereum);
-//     console.log('Injected web3 detected.')
-//     sttcontract = new web3.eth.Contract(sttabi, sttaddr);
-//     let a = await ethereum.enable();
-//     addr = web3.utils.toChecksumAddress(a[0]);
-//     return (addr);
-
+//     if (window.ethereum) {
+//       web3 = new Web3(window.ethereum);
+//       console.log('Injected web3 detected.');
+//       sttcontract = new web3.eth.Contract(sttabi, sttaddr);
+//       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+//       addr = web3.utils.toChecksumAddress(accounts[0]);
+//       return addr;
+//     } else {
+//       Swal.fire('Connect Alert', 'Please install MetaMask!', 'error');
+//     }
 //   } catch (error) {
 //     if (error.code === 4001) {
-//       console.log('Please connect to MetaMask.')
+//       console.log('Please connect to MetaMask.');
 //     } else {
-//       Swal.fire(
-//         'Connect Alert',
-//         'Please install Metamask!',
-//         'error'
-//       )
+//       Swal.fire('Connect Alert', 'An error occurred during connection!', 'error');
 //     }
 //   }
 // };
+
+const loadweb3 = async () => {
+  try {
+    web3 = new web3js.myweb3(window.ethereum);
+    console.log('Injected web3 detected.')
+    sttcontract = new web3.eth.Contract(sttabi, sttaddr);
+    let a = await ethereum.enable();
+    addr = web3.utils.toChecksumAddress(a[0]);
+    return (addr);
+
+  } catch (error) {
+    if (error.code === 4001) {
+      console.log('Please connect to MetaMask.')
+    } else {
+      Swal.fire(
+        'Connect Alert',
+        'Please install Metamask!',
+        'error'
+      )
+    }
+  }
+};
 
 
 
