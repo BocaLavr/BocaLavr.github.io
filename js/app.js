@@ -691,7 +691,7 @@ document.getElementById("add").innerHTML = contr.substring(0, 5)+ "...." + contr
 //***************** some beauty jewelry  *****************/
 
 // Set the date we're counting down to
-var countDownDate = new Date("Aug 5 2025, 07:37:25").getTime();
+var countDownDate = new Date("Aug 5 2025, 07:37:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function () {
