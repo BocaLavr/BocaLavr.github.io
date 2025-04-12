@@ -620,7 +620,7 @@ const loadweb3 = async () => {
 
 function addToWallet() {
   try {
-     await window.ethereum.request({
+      web3.currentProvider.sendAsync({
       method: 'wallet_watchAsset',
       params: {
         'type': 'ERC20',
