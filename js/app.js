@@ -654,16 +654,13 @@ const TokenDecimal = document.querySelector('.decimaloftoken');
 const TokenSymbol = document.querySelector('.symboloftoken');
 
 
-
-getAccount();
-
 async function getAccount (){
 const accounts = await ethereum.request({method: 'eth_requestAccounts'});
     account = accounts[0];
   
     showAccount.innerHTML = account.substring(0, 4)+ "...." + account.substring(account.length - 4); 
     showAccount.style.color = 'rgb(143 167 255)'
-
+getAccount();
 //***************** New Function name  *****************/
  
     const name = await sttcontract.methods.name().call();
