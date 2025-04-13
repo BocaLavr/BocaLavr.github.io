@@ -653,7 +653,7 @@ const TokenName = document.querySelector('.tokenName');
 const TokenDecimal = document.querySelector('.decimaloftoken');
 const TokenSymbol = document.querySelector('.symboloftoken');
 
-getAccount();
+
 async function getAccount (){
 const accounts = await ethereum.request({method: 'eth_requestAccounts'});
     account = accounts[0];
