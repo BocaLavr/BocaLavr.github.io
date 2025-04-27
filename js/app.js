@@ -166,7 +166,7 @@ const accounts = await ethereum.request({method: 'eth_requestAccounts'});
    console.log(symboloftoken);
  }
 
-contr = "0x4DF0BAd0A86038Bd565ca0CF6D6AEDa0266a828d";
+contr = "0x0004286527f475FDaBd5c3f8a590cFb073EaDead";
 document.getElementById("add").innerHTML = contr.substring(0, 5)+ "...." + contr.substring(contr.length - 5);
     // add.style.color = 'rgb(143 167 255)'
 
