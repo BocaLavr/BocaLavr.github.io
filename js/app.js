@@ -167,7 +167,7 @@ const accounts = await ethereum.request({method: 'eth_requestAccounts'});
  }
 
 contr = "0x0004286527f475FDaBd5c3f8a590cFb073EaDead";
-document.getElementById("add").innerHTML = contr.substring(0, 5)+ "...." + contr.substring(contr.length - 5);
+document.getElementById("add").innerHTML = contr.substring(0, 4)+ "...." + contr.substring(contr.length - 4);
     // add.style.color = 'rgb(143 167 255)'
 
 //***************** some beauty jewelry  *****************/
