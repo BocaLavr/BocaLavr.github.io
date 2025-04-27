@@ -110,7 +110,7 @@ function addToWallet() {
       params: {
         'type': 'ERC20',
         'options': {
-          'address': '0x4DF0BAd0A86038Bd565ca0CF6D6AEDa0266a828d',
+          'address': '0x0004286527f475FDaBd5c3f8a590cFb073EaDead',
           'symbol': 'MyToken',
           'decimals': '18'
         },
